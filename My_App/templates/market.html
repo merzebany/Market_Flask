@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block head %}
+Market Page
+{% endblock %}
+
+{%block body %}
+<script>
+
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+</script>
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3  bg-dark" style="color:white">
+  <div class="col">
+
+
+
+    <div class="row" style="margin-top:20px; margin-left: 20px;">
+
+      <div class="col-8">
+
+        <h2> Available Item on the Market</h2>
+        <p>Click on one of the item to start buying</p>
+        <br>
+
+        <table class="table table-hover table-dark text-center">
+          <thead>
+            <tr style="color: red">
+              <!-- Your Columns HERE -->
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Barcode</th>
+              <th scope="col">Price</th>
+              <th scope="col">Options</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for item in items_V %}
+            {% include 'includes/items_modals.html' %}
+            <tr>
+              <td>{{ item.id }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.barcode }}</td>
+              <td>{{ item.price }}$</td>
+              <td>
+                <button class="btn btn-outline btn-info me-3" data-toggle="modal"
+                  data-target="#Modal-MoreInfo-{{item.id}}">
+                  <i class="bi bi-info-square"></i></button>
+                <button class="btn btn-outline btn-success me-3" data-toggle="modal"
+                  data-target="#Modal-PurchaseConfirm-{{item.id}}"><i class="bi bi-cart-check"></i></button>
+
+                {% if current_user.admin == true %}
+
+                <a class="btn btn-outline btn-primary me-3" href="{{ url_for('EditItem_page', item_id=item.id) }}"
+                  data-bs-toggle="tooltip" data-bs-title="Edit Item">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+
+                <a class="btn btn-outline btn-danger" href="{{ url_for('DeleteItem_page', item_id=item.id) }}">
+                  <i class="bi bi-trash"></i>
+                </a>
+
+                <!-- <button type="button" class="btn btn-outline btn-primary" href="{{ url_for('EditItem_page') }}">Edit
+                  Item</button> -->
+
+                {% endif %}
+
+
+              </td>
+            </tr>
+
+            {% endfor %}
+
+          </tbody>
+        </table>
+
+      </div>
+
+      <!-- **************************************************************************************************  -->
+      <!-- **************************************************************************************************  -->
+
+      <div class="col-4">
+
+        <h2>Owned Items</h2>
+        <p>Click on sell item to put an item back on the Market</p>
+        <p>No of Item Where selled is : {{ NoOfItemForUser_V }} with total price of : {{total_v}} $ </p>
+        <br>
+        <div class="row">
+          {% for owned_item in owned_items %}
+          {% include 'includes/owned_items_modals.html' %}
+          <div class="col-md-6">
+            <div style="margin-bottom: 5px " class="card text-center bg-dark">
+              <div class="card-body border border-white border-3"
+                style="color:white; background-color: #565656; border-radius:20px">
+                <h5 class="card-title">{{ owned_item.name }}</h5>
+                <button type="button" class="btn btn-outline-primary mb-2 mt-2" style="margin-bottom: 5px; "
+                  data-toggle="modal" data-target="#Modal-SellingConfirm-{{ owned_item.id }}">
+                  Sell this Item
+                </button>
+                <p class="card-text" style="color:white"><strong>
+                    This item costs {{ owned_item.price }}$
+                  </strong></p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+  </div>
+</div>
+
+
+
+{% endblock %}

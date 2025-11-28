@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block head %} Login Page {% endblock %}
+
+
+{% block body %}
+
+<body>
+  <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3  bg-dark" style="color:white">
+
+    <div class="container text-center">
+
+      <form method="POST" class="form-signin" style="color: white">
+
+        <!-- حماية للمدخلات من الهاكر     -->
+        {{ form.hidden_tag() }}
+
+        <div class="text-center">
+          <img class="mb-4 " src="{{ url_for('static', filename = 'image/FullLogo.png') }}" alt="">
+
+          <!-- <img class="mb-4 "
+            src="https://res.cloudinary.com/jimshapedcoding/image/upload/v1597332609/android-icon-192x192_ove2a7.png"
+            alt=""> -->
+          <h1 class="h3 mb-3 font-weight-normal">
+            Please Create your Account
+          </h1>
+        </div>
+
+
+        <br>
+        <div>
+          {{ form.username.label(class="text-end") }}
+          {{ form.username(class="form-control mt-2 mb-2", placeholder="User Name") }}
+
+          {{ form.password.label() }}
+
+          <div class="mt-2 mb-2 box">
+            {{ form.password(class="form-control", style="width: 95%; display: inline;left: -15px; position: relative;"
+            ,placeholder="Password") }}
+            <span>
+              <i id="toggle" class="bi bi-eye ms-2 fs-4 mt-2" style="cursor: pointer;"></i>
+
+            </span>
+          </div>
+
+          <br>
+        </div>
+        <div class="checkbox mb-3 text-center">
+
+          <h6>Do not have an account</h6>
+          <a class="btn btn-sm btn-secondary" href="{{ url_for('register_page') }}">Register</a>
+
+        </div>
+
+        {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+
+
+      </form>
+    </div>
+
+  </div>
+
+</body>
+{% endblock %}

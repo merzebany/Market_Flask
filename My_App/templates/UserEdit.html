@@ -1,0 +1,73 @@
+<!-- prettier-ignore -->
+{% extends "base.html" %}
+
+{% block head %}
+Edit User Page
+{% endblock %}
+
+
+{% block body %}
+
+<body>
+        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3  bg-dark" style="color:white">
+                <div class="container">
+
+                        {% include 'includes/Chang_password_modals.html' %}
+
+                        <form method="POST" class="form-register" style="color: white">
+
+                                <!-- حماية للمدخلات من الهاكر     -->
+                                {{ form.hidden_tag() }}
+
+                                <div class="text-center">
+
+                                        <h1 class="h3 mb-3 font-weight-normal">
+                                                Please Edit your Account
+                                        </h1>
+                                </div>
+
+
+                                <br>
+
+                                {{ form.username.label(class="text-end") }}
+                                {{ form.username(class="form-control mt-2 mb-2", placeholder="User Name") }}
+
+                                {{ form.email_address.label() }}
+                                {{ form.email_address(class="form-control mt-2 mb-2", placeholder="Email Address") }}
+
+                                {{ form.budget.label() }}
+                                {{ form.budget(class="form-control mt-2 mb-2", placeholder="budget") }}
+
+                                {% if current_user.admin == true %}
+                                {{ form.admin.label() }}
+                                {{ form.admin(class="ms-2 mt-2 mb-3" ,style= "width: 20px; height: 20px;",
+                                placeholder="admin")
+                                }}
+                                {% endif %}
+
+                                <br>
+                                <div class="text-center">
+                                        {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+                                </div>
+                        </form>
+
+                        <br>
+                        <div class="text-center">
+
+                                <button type="button" class="btn btn-block btn-info mb-2 mt-2" data-toggle="modal"
+                                        data-target="#Modal-ChangePassword-{{ User_id_V }}">
+                                        Change password
+                                </button>
+
+                        </div>
+
+                </div>
+
+        </div>
+
+
+
+
+
+</body>
+{% endblock %}

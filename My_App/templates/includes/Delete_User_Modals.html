@@ -1,0 +1,50 @@
+<!-- Purchase Confirm -->
+
+<style>
+  .modal-content {
+    background-color: #212121;
+    color: white;
+  }
+</style>
+
+<div class="modal fade" id="Modal-DeleteUser-{{user.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">
+
+          User Name : {{ user.username }}
+        </h5>
+
+      </div>
+      <div class="modal-body">
+
+
+        <form method="POST">
+          {{ DeleteUser_form.hidden_tag() }}
+          <h4 class="text-center">
+            The user was sold {{ user.item_count }} items by ${{ "%.2f"|format(user.total_value) }} !!
+          </h4>
+          <br>
+          <h4 class="text-center">
+            Are you sure you want to Delete User {{ user.username }} ?
+          </h4>
+          <br>
+
+          <div class="text-center">
+            <input id="deleted_user" name="deleted_user" type="hidden" value="{{user.id}}">
+            {{ DeleteUser_form.submit(class="btn btn-outline-danger btn-block") }}
+          </div>
+
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

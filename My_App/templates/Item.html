@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block head %}
+Item Page
+{% endblock %}
+
+
+{% block body %}
+
+<body>
+  <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3  bg-dark" style="color:white">
+
+    <div class="container">
+      <form method="POST" class="form-register" style="color: white">
+
+        <!-- حماية للمدخلات من الهاكر     -->
+        {{ form.hidden_tag() }}
+
+        <div class="text-center">
+
+          <h1 class="h3 mb-3 font-weight-normal">
+            {{ Tital_V_Form }}
+          </h1>
+        </div>
+
+
+        <br>
+
+        {{ form.Item_name.label(class="text-end") }}
+        {{ form.Item_name(class="form-control mt-2 mb-2", placeholder="Item Name") }}
+
+        {{ form.Item_price.label() }}
+        {{ form.Item_price(class="form-control mt-2 mb-2", placeholder="Item price") }}
+
+        {{ form.Item_barcode.label() }}
+        {{ form.Item_barcode(class="form-control mt-2 mb-2", placeholder="Item barcode") }}
+
+        {{ form.Item_description.label() }}
+        {{ form.Item_description(class="form-control mt-2 mb-2", placeholder="Item_description") }}
+
+        <br>
+
+
+        <div class="text-center">
+          {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+        </div>
+
+
+      </form>
+    </div>
+
+  </div>
+
+</body>
+{% endblock %}

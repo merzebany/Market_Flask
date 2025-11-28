@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <!-- Bootstrap icon style -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+
+
+  <title>{% block head %} {% endblock %}</title>
+
+  <!-- MY CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css') }}" />
+
+  <!-- <link rel="stylesheet" type="text/css" href="/My_App/css/main.css"> -->
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <img class="navimg ms-4" src="{{ url_for('static', filename = 'image/FullLogo.png') }}" alt="">
+    <a class="navbar-brand ms-3 fs-3" href="#">Merzo Market</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ url_for('home_page') }}">Home <span class="sr-only"></span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('market_page') }}">Market</a>
+        </li>
+
+        {% if current_user.is_authenticated and current_user.admin == true %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('Item_page') }}">Add Items to Market</a>
+        </li>
+        {% endif %}
+
+        {% if current_user.is_authenticated and current_user.admin == true %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('users_page') }}">User</a>
+        </li>
+        {% endif %}
+
+      </ul>
+
+
+      {% if current_user.is_authenticated %}
+
+      <ul class="navbar-nav text-end">
+        <li class="nav-item">
+          <a class="nav-link" style="color: lawngreen; font-weight: bold">
+            <i class="bi bi-cash-coin"></i>
+            {{ current_user.prettier_budget}}
+          </a>
+        </li>
+
+
+
+        {% if current_user.admin == true %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('EditUser_page') }}" style="color: red;"> <i class="bi bi-person-circle">
+              {{
+              current_user.username }} </i>
+          </a>
+        </li>
+
+        {% else %}
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('EditUser_page') }}"> <i class="bi bi-person-circle"> {{
+              current_user.username }} </i>
+          </a>
+        </li>
+
+        {% endif %}
+
+
+
+        <li class="nav-item me-5">
+          <a class="nav-link" href="{{ url_for('logout_page') }}">Logout</a>
+        </li>
+
+      </ul>
+
+
+      {% else %}
+
+      <ul class="navbar-nav text-end">
+        <li class="nav-item ">
+          <a class="nav-link" href="{{ url_for('login_page') }}">Login</a>
+        </li>
+        <li class="nav-item me-5">
+          <a class="nav-link" href="{{ url_for('register_page') }}">Register</a>
+        </li>
+      </ul>
+
+      {% endif %}
+
+    </div>
+  </nav>
+
+  <!--  ************************************************************************************* -->
+  <!--  اظها الخطاء في الفاليديشن عى الشاشة -->
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+
+  <div class="alert alert-{{ category }} alert-dismissible fade show text-center" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <!--  ************************************************************************************* -->
+  {% block body %}
+
+  {% endblock %}
+
+
+
+
+
+
+  <script src="{{ url_for('static', filename = 'js/main.js') }}"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+    integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+    crossorigin="anonymous"></script>
+
+
+
+
+</body>
+
+</html>
