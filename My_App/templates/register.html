@@ -8,62 +8,62 @@ Register Page
 
 {% block body %}
 
-<body>
-        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3  bg-dark" style="color:white">
 
-                <div class="container">
-                        <form method="POST" class="form-register" style="color: white">
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3  bg-dark" style="color:white">
 
-                                <!-- حماية للمدخلات من الهاكر     -->
-                                {{ form.hidden_tag() }}
+        <div class="container">
+                <form method="POST" class="form-register" style="color: white">
 
-                                <div class="text-center">
-                                        <img class="mb-1 "
-                                                src="{{ url_for('static', filename = 'image/FullLogo.png') }}" alt="">
-                                        <!-- <img class="mb-4 "
+                        <!-- حماية للمدخلات من الهاكر     -->
+                        {{ form.hidden_tag() }}
+
+                        <div class="text-center">
+                                <img class="mb-1 " src="{{ url_for('static', filename = 'image/FullLogo.png') }}"
+                                        alt="">
+                                <!-- <img class="mb-4 "
                                                 src="https://res.cloudinary.com/jimshapedcoding/image/upload/v1597332609/android-icon-192x192_ove2a7.png"
                                                 alt=""> -->
-                                        <h1 class="h3 mb-3 font-weight-normal">
-                                                Please Create your Account
-                                        </h1>
-                                </div>
+                                <h1 class="h3 mb-3 font-weight-normal">
+                                        Please Create your Account
+                                </h1>
+                        </div>
 
 
-                                <br>
+                        <br>
 
-                                {{ form.username.label(class="text-end") }}
-                                {{ form.username(class="form-control mt-2 mb-2", placeholder="User Name") }}
+                        {{ form.username.label(class="text-end") }}
+                        {{ form.username(class="form-control mt-2 mb-2", placeholder="User Name") }}
 
-                                {{ form.email_address.label() }}
-                                {{ form.email_address(class="form-control mt-2 mb-2", placeholder="Email Address") }}
+                        {{ form.email_address.label() }}
+                        {{ form.email_address(class="form-control mt-2 mb-2", placeholder="Email Address") }}
 
-                                {{ form.password1.label() }}
-                                {{ form.password1(class="form-control mt-2 mb-2", placeholder="Password") }}
+                        {{ form.password1.label() }}
+                        {{ form.password1(class="form-control mt-2 mb-2", placeholder="Password") }}
 
-                                {{ form.password2.label() }}
-                                {{ form.password2(class="form-control mt-2 mb-2", placeholder="Confirm Password") }}
+                        {{ form.password2.label() }}
+                        {{ form.password2(class="form-control mt-2 mb-2", placeholder="Confirm Password") }}
 
-                                <br>
+                        <br>
 
-                                <div class="checkbox mb-3 text-center">
+                        <div class="checkbox mb-3 text-center">
 
-                                        <h6>Already have an account</h6>
-                                        <a class="btn btn-sm btn-secondary" href="{{ url_for('login_page') }}">Log
-                                                in</a>
+                                <h6>Already have an account</h6>
+                                <a class="btn btn-sm btn-secondary" href="{{ url_for('login_page') }}">Log
+                                        in</a>
 
-                                </div>
-
-
-
-                                <div class="text-center">
-                                        {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
-                                </div>
+                        </div>
 
 
-                        </form>
-                </div>
 
+                        <div class="text-center">
+                                {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+                        </div>
+
+
+                </form>
         </div>
 
-</body>
+</div>
+
+
 {% endblock %}
