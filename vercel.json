@@ -4,6 +4,7 @@
       "src": "run.py",
       "use": "@vercel/python",
       "config": { "includeFiles": ["MARKET_FLASK/My_App/static/images"] }
+     
     }
   ],
   "routes": [
